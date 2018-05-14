@@ -1,0 +1,433 @@
+
+如何检验你是否是一个合格的初级java开发者
+2018年04月07日 11:36:35
+阅读数：20
+https://blog.csdn.net/sanyaoxu_2/article/details/78786950
+
+
+
+一、数据结构与算法基础
+
+说一下几种常见的排序算法和分别的复杂度。
+
+
+   写出下列算法的时间复杂度。
+（1）冒泡排序；
+（2）选择排序；
+（3）插入排序；
+（4）快速排序；
+（5）堆排序；
+（6）归并排序；
+答案：
+冒泡排序算法时间复杂度是O(n^2)。
+选择排序算法复杂度是O(n^2)。
+插入排序算法时间复杂度是O(n^2)
+快速排序快速排序是不稳定的。最理想情况算法时间复杂度O(nlog2n)，最坏O(n^2)。
+堆排序算法时间复杂度O(nlogn)。
+归并排序的时间复杂度是O(nlog2n)。
+//http://blog.sina.com.cn/s/blog_71fa0df50100zk0e.html
+
+用Java写一个冒泡排序算法 
+
+  /*
+ * 冒泡排序
+ */
+public class BubbleSort {
+　　public static void main(String[] args) {
+　　　　int[] arr={6,3,8,2,9,1};
+　　　　System.out.println("排序前数组为：");
+　　　　for(int num:arr){
+　　　　　　System.out.print(num+" ");
+　　　　}
+　　　　for(int i=0;i<arr.length-1;i++){//外层循环控制排序趟数
+　　　　　　for(int j=0;j<arr.length-1-i;j++){//内层循环控制每一趟排序多少次
+　　　　　　　　if(arr[j]>arr[j+1]){
+　　　　　　　　　　int temp=arr[j];
+　　　　　　　　　　arr[j]=arr[j+1];
+　　　　　　　　　　arr[j+1]=temp;
+　　　　　　　　}
+　　　　　　}
+　　　　} 
+　　　　System.out.println();
+　　　　System.out.println("排序后的数组为：");
+ 　　　　for(int num:arr){
+ 　　　　　　System.out.print(num+" ");
+ 　　　　} 
+　　}
+ }
+ 
+ 
+ 
+ /** 
+ * java编程题：用Java实现一个冒泡排序算法  
+ */  
+public class Test12 {  
+  
+    public static void main(String[] args) {  
+        int[] sortNum = {12,33,28,86,15,62,9,38};       //定义数组  
+        bubbleSort3(sortNum);                           //开始排序  
+        System.out.println(Arrays.toString(sortNum));   //打印结果  
+    }  
+      
+    /** 
+     * 写法一：从小到大顺序进行排列，从[前面]开始比较。。。容易理解。 
+     *  
+     * @param sortNum 
+     */  
+    private static void bubbleSort(int[] sortNum){  
+        int temp = 0;  
+        for (int i = 0; i < sortNum.length-1; i++) {         //第一个for循环控制排序要走多少趟，最多做n-1趟排序  
+            for (int j = 0; j < sortNum.length-1-i; j++) {       //第2个for循环控制每趟比较多少次  
+                if(sortNum[j+1]<sortNum[j]){                 //大的往后面排  
+                    temp = sortNum[j];  
+                    sortNum[j] = sortNum[j+1];  
+                    sortNum[j+1] = temp;  
+                }  
+            }  
+        }  
+    }  
+      
+    /** 
+     * 写法二：从小到大顺序进行排列，从[后面]开始比较。。。不按常规套路出牌。 
+     *  
+     * @param sortNum 
+     */  
+    private static void bubbleSort2(int[] sortNum){  
+        int temp = 0;  
+        for (int i = 0; i < sortNum.length-1; i++) {         //第一个for循环控制排序要走多少趟，最多做n-1趟排序  
+            for (int j = sortNum.length-1; j > i; j--) {     //第2个for循环控制每趟比较多少次  
+                if(sortNum[j-1]>sortNum[j]){                 //大的往后面排  
+                    temp = sortNum[j-1];  
+                    sortNum[j-1] = sortNum[j];  
+                    sortNum[j] = temp;  
+                }  
+            }  
+        }  
+    }  
+      
+      
+    /** 
+     * 写法三：从小到大顺序进行排列，从[前面]开始比较。。。改进优化版。 
+     *  
+     * @param sortNum 
+     */  
+    private static void bubbleSort3(int[] sortNum){  
+        boolean flag = true;  
+        while(flag){  
+            flag = false;  
+              
+            int temp = 0;  
+            for (int i = 0; i < sortNum.length-1; i++) {         //第一个for循环控制排序要走多少趟，最多做n-1趟排序  
+                for (int j = 0; j < sortNum.length-1-i; j++) {       //第2个for循环控制每趟比较多少次  
+                    if(sortNum[j+1]<sortNum[j]){                 //大的往后面排  
+                        temp = sortNum[j];  
+                        sortNum[j] = sortNum[j+1];  
+                        sortNum[j+1] = temp;  
+                        flag = true;  
+                    }  
+                }  
+                //优化判断  
+                if(!flag){// 若没有交换则排序完成，直接跳出  
+                    break;  
+                }  
+            }  
+        }  
+    }  
+      
+}  
+ 
+
+
+
+描述一下链式存储结构。 
+
+
+链式存储结构和顺序存储结构的区别
+
+算法设计的要求
+
+时间效率高
+存储量低
+顺序存储结构和链式存储结构的区别
+
+链表存储结构的内存地址不一定是连续的，但顺序存储结构的内存地址一定是连续的；
+链式存储适用于在较频繁地插入、删除、更新元素时，而顺序存储结构适用于频繁查询时使用。
+顺序存储结构和链式存储结构的优缺点：
+
+空间上
+顺序比链式节约空间。是因为链式结构每一个节点都有一个指针存储域。
+
+存储操作上：
+顺序支持随机存取，方便操作
+
+插入和删除上：
+链式的要比顺序的方便（因为插入的话顺序表也很方便，问题是顺序表的插入要执行更大的空间复杂度，包括一个从表头索引以及索引后的元素后移，而链表是索引后，插入就完成了）
+
+例如：当你在字典中查询一个字母j的时候，你可以选择两种方式，第一，顺序查询，从第一页依次查找直到查询到j。第二，索引查询，从字典的索引中，直接查出j的页数，直接找页数，或许是比顺序查询最快的。
+
+
+链式结构是一种数据结构，学名链式存储结构，又叫链接存储结构。使用对象引用变量来创建对象间的链接。
+
+它不要求逻辑上相邻的元素在物理位置上也相邻。因此它没有顺序存储结构所具有的弱点，同时也失去了顺序表可随机存取的优点。
+
+其特点主要表现为： 
+1、比顺序存储结构的存储密度小； 
+2、插入、删除灵活，结点可以被插入到链表的任何位置，首、中、末都可以，而且不必要移动结点中的指针； 
+3、链表的大小可以按需伸缩，是一种动态存储结构，其实现的集合在增、删方面性能更高； 
+4、查找结点时的效率就相对数组较低，只能从第一个结点开始顺着链表逐个查找（这是他的缺点）。
+
+//https://blog.csdn.net/sgyingyin/article/details/52210113
+
+
+
+如何遍历一棵二叉树？ 
+
+https://blog.csdn.net/gfj0814/article/details/51637696
+
+
+
+倒排一个LinkedList。 
+
+
+复制代码
+ 1 import java.util.Collections;
+ 2 import java.util.LinkedList;
+ 3 import java.util.List;
+ 4 
+ 5 public class Test {
+ 6 
+ 7      List list  =   new  LinkedList();
+ 8      public   static   void  main(String[] args)  {
+ 9         List list  =   new  LinkedList();
+10          for  ( int  i  =   0 ; i  <   9 ; i ++ )  {
+11             list.add( " a " + i);
+12         } 
+13         Collections.sort(list); // 顺序排列 
+14         System.out.println(list);
+15         
+16         Collections.shuffle(list); // 混乱的意思 
+17         System.out.println(list);
+18         
+19         Collections.reverse(list); // 倒序排列 
+20         System.out.println(list);
+21         
+22         System.out.println(Collections.binarySearch(list,  " a5 " )); // 折半查找 
+23     } 
+24     
+25 }
+
+
+用Java写一个递归遍历目录下面的所有文件。
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+public class ListDirectory {
+    public static void showDirectory(File file){
+        File[] files = file.listFiles();
+        for(File a:files){
+            System.out.println(a.getAbsolutePath());
+            if(a.isDirectory()){
+                showDirectory(a);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+    File file = new File("E:\\aaa");    
+    showDirectory(file);
+    }
+}
+
+
+
+二、Java基础
+
+接口与抽象类的区别？ 
+http://www.importnew.com/12399.html
+
+
+
+Java中的异常有哪几类？分别怎么使用？ 
+
+Throwable包含了错误(Error)和异常(Excetion两类)
+Exception又包含了运行时异常(RuntimeException, 又叫非检查异常)和非运行时异常(又叫检查异常)
+(1) Error是程序无法处理了, 如果OutOfMemoryError、OutOfMemoryError等等, 这些异常发生时, java虚拟机一般会终止线程 .
+(2) 运行时异常都是RuntimeException类及其子类,如 NullPointerException、IndexOutOfBoundsException等, 这些异常是不检查的异常, 是在程序运行的时候可能会发生的, 所以程序可以捕捉, 也可以不捕捉. 这些错误一般是由程序的逻辑错误引起的, 程序应该从逻辑角度去尽量避免.
+(3) 检查异常是运行时异常以外的异常, 也是Exception及其子类, 这些异常从程序的角度来说是必须经过捕捉检查处理的, 否则不能通过编译. 如IOException、SQLException等
+
+
+两者的区别
+
+        非检查异常表示无法让程序恢复运行的异常，导致这种异常的原因通常是由于执行了错误的操作。一旦出现错误，建议让程序终止。
+
+受检查异常表示程序可以处理的异常。如果抛出异常的方法本身不处理或者不能处理它，那么方法的调用者就必须去处理该异常，否则调用会出错，连编译也无法通过。
+
+对于运行异常，建议不要用 try...catch...捕获处理，应该在程序开发调试的过程中尽量的避免，当然有一些必须要处理的，自己知道了那个部分会出现异常，而这种异常你要把它处理的你想要的结果，例如：空值处理。
+
+
+
+
+常用的集合类有哪些？比如List如何排序？
+
+//https://blog.csdn.net/ITzhangdaopin/article/details/78711160
+
+
+
+ArrayList和LinkedList内部的实现大致是怎样的？他们之间的区别和优缺点？ 
+
+//https://zhidao.baidu.com/question/244375015831087124.html
+
+
+
+内存溢出是怎么回事？请举一个例子？ 
+
+
+
+
+
+
+
+==和equals的区别？ 
+hashCode方法的作用？ 
+NIO是什么？适用于何种场景？ 
+HashMap实现原理，如何保证HashMap的线程安全？ 
+JVM内存结构，为什么需要GC？ 
+NIO模型，select/epoll的区别，多路复用的原理 
+Java中一个字符占多少个字节，扩展再问int, long, double占多少字节 
+创建一个类的实例都有哪些办法？ 
+final/finally/finalize的区别？ 
+Session/Cookie的区别？ 
+String/StringBuffer/StringBuilder的区别，扩展再问他们的实现？ 
+Servlet的生命周期？ 
+如何用Java分配一段连续的1G的内存空间？需要注意些什么？ 
+Java有自己的内存回收机制，但为什么还存在内存泄露的问题呢？ 
+什么是java序列化，如何实现java序列化?(写一个实例)？ 
+String s = new String(“abc”);创建了几个 String Object?
+
+三、JVM
+
+JVM堆的基本结构。 
+JVM的垃圾算法有哪几种？CMS垃圾回收的基本流程？ 
+JVM有哪些常用启动参数可以调整，描述几个？ 
+如何查看JVM的内存使用情况？ 
+Java程序是否会内存溢出，内存泄露情况发生？举几个例子。 
+你常用的JVM配置和调优参数都有哪些？分别什么作用？ 
+JVM的内存结构？ 
+常用的GC策略，什么时候会触发YGC，什么时候触发FGC？
+
+四、多线程/并发
+
+如何创建线程？如何保证线程安全？ 
+如何实现一个线程安全的数据结构 
+如何避免死锁 
+Volatile关键字的作用？ 
+HashMap在多线程环境下使用需要注意什么？为什么？ 
+Java程序中启动一个线程是用run()还是start()？ 
+什么是守护线程？有什么用？ 
+什么是死锁？如何避免 
+线程和进程的差别是什么？ 
+Java里面的Threadlocal是怎样实现的？ 
+ConcurrentHashMap的实现原理是？ 
+sleep和wait区别 
+notify和notifyAll区别 
+volatile关键字的作 
+ThreadLocal的作用与实现 
+两个线程如何串行执行 
+上下文切换是什么含义 
+可以运行时kill掉一个线程吗？ 
+什么是条件锁、读写锁、自旋锁、可重入锁？ 
+线程池ThreadPoolExecutor的实现原理？
+
+五、Linux使用与问题分析排查
+
+使用两种命令创建一个文件？ 
+硬链接和软链接的区别？ 
+Linux常用命令有哪些？ 
+怎么看一个Java线程的资源耗用？ 
+Load过高的可能性有哪些？ 
+/etc/hosts文件什么做用？ 
+如何快速的将一个文本中所有“abc”替换为“xyz”？ 
+如何在log文件中搜索找出error的日志？ 
+发现磁盘空间不够，如何快速找出占用空间最大的文件？ 
+Java服务端问题排查（OOM，CPU高，Load高，类冲突） 
+Java常用问题排查工具及用法（top, iostat, vmstat, sar, tcpdump, jvisualvm, jmap, jconsole） 
+Thread dump文件如何分析（Runnable，锁，代码栈，操作系统线程ID关联） 
+如何查看Java应用的线程信息？
+
+六、框架使用
+
+描述一下Hibernate的三个状态？ 
+Spring中Bean的生命周期。 
+SpringMVC或Struts处理请求的流程。 
+Spring AOP解决了什么问题？怎么实现的？ 
+Spring事务的传播属性是怎么回事？它会影响什么？ 
+Spring中BeanFactory和FactoryBean有什么区别？ 
+Spring框架中IOC的原理是什么？ 
+spring的依赖注入有哪几种方式 
+struts工作流程 
+用Spring如何实现一个切面？ 
+Spring 如何实现数据库事务？ 
+Hibernate对一二级缓存的使用，Lazy-Load的理解； 
+mybatis如何实现批量提交？
+
+七、数据库相关
+
+MySQL InnoDB、Mysaim的特点？ 
+乐观锁和悲观锁的区别？ 
+数据库隔离级别是什么？有什么作用？ 
+MySQL主备同步的基本原理。 
+select * from table t where size > 10 group by size order by size的sql语句执行顺序？ 
+如何优化数据库性能（索引、分库分表、批量操作、分页算法、升级硬盘SSD、业务优化、主从部署） 
+SQL什么情况下不会使用索引（不包含，不等于，函数） 
+一般在什么字段上建索引（过滤数据最多的字段） 
+如何从一张表中查出name字段不包含“XYZ”的所有行？ 
+MySQL，B+索引实现，行锁实现，SQL优化 
+Redis，RDB和AOF，如何做高可用、集群 
+如何解决高并发减库存问题 
+mysql存储引擎中索引的实现机制； 
+数据库事务的几种粒度； 
+行锁，表锁；乐观锁，悲观锁
+
+八、网络协议和网络编程
+
+TCP建立连接的过程。 
+TCP断开连接的过程。 
+浏览器发生302跳转背后的逻辑？ 
+HTTP协议的交互流程。HTTP和HTTPS的差异，SSL的交互流程？ 
+Rest和Http什么关系？ 大家都说Rest很轻量，你对Rest风格如何理解？ 
+TCP的滑动窗口协议有什么用？讲讲原理。 
+HTTP协议都有哪些方法？ 
+交换机和路由器的区别？ 
+Socket交互的基本流程？ 
+http协议（报文结构，断点续传，多线程下载，什么是长连接） 
+tcp协议（建连过程，慢启动，滑动窗口，七层模型） 
+webservice协议（wsdl/soap格式，与rest协议的区别） 
+NIO的好处，Netty线程模型，什么是零拷贝
+
+九、Redis等缓存系统/中间件/NoSQL/一致性Hash等
+
+列举一个常用的Redis客户端的并发模型。 
+HBase如何实现模糊查询？ 
+列举一个常用的消息中间件，如果消息要保序如何实现？ 
+如何实现一个Hashtable？你的设计如何考虑Hash冲突？如何优化？ 
+分布式缓存，一致性hash 
+LRU算法，slab分配，如何减少内存碎片 
+如何解决缓存单机热点问题 
+什么是布隆过滤器，其实现原理是？ False positive指的是？ 
+memcache与redis的区别 
+zookeeper有什么功能，选举算法如何进行 
+map/reduce过程，如何用map/reduce实现两个数据源的联合统计
+
+HashMap,nginx、dubbo、Spring MVC,分布式、高性能高可用、redis、jvm、多线程、netty、kafka
+十、设计模式与重构
+
+你能举例几个常见的设计模式 
+你在设计一个工厂的包的时候会遵循哪些原则？ 
+你能列举一个使用了Visitor/Decorator模式的开源项目/库吗？ 
+你在编码时最常用的设计模式有哪些？在什么场景下用？ 
+如何实现一个单例？ 
+代理模式（动态代理） 
+单例模式（懒汉模式，恶汉模式，并发初始化如何解决，volatile与lock的使用） 
+JDK源码里面都有些什么让你印象深刻的设计模式使用，举例看看？
+
